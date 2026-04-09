@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Course Analytics</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+      min-height: 100vh;
+      padding: 30px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    h1 { text-align: center; color: #333; }
+    p.subtitle { text-align: center; color: #777; margin-bottom: 25px; }
+    .averages {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+    .avg-box {
+      flex: 1;
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+      color: white;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+    }
+    .avg-box h3 { margin: 0 0 5px; font-size: 1em; }
+    .avg-box span { font-size: 2em; font-weight: bold; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    thead { background: linear-gradient(135deg, #f093fb, #f5576c); color: white; }
+    th, td { padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: left; }
+    tbody tr:hover { background: #fff0f5; }
+    .risk { color: #e74c3c; font-weight: bold; }
+    .safe { color: #27ae60; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📊 Course Analytics — Data Structures</h1>
+    <p class="subtitle">Academic Risk Identification & Class Averages</p>
+
+    <div class="averages">
+      <div class="avg-box">
+        <h3>Avg Internal Marks</h3>
+        <span id="avgInternal">-</span>
+      </div>
+      <div class="avg-box">
+        <h3>Avg Assignment Score</h3>
+        <span id="avgAssignment">-</span>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th><th>Attendance %</th>
+          <th>Internal Marks</th><th>Avg Assignment</th><th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const data = {
+      students: [
+        { student_id: 1, name: "Ravi Kumar", attendance_percentage: 80, internal_marks: 45, assignment_scores: [8, 9, 7] },
+        { student_id: 2, name: "Priya Sharma", attendance_percentage: 60, internal_marks: 38, assignment_scores: [5, 6, 4] },
+        { student_id: 3, name: "Arjun Patel", attendance_percentage: 90, internal_marks: 50, assignment_scores: [9, 10, 9] },
+        { student_id: 4, name: "Neha Reddy", attendance_percentage: 72, internal_marks: 42, assignment_scores: [7, 8, 6] },
+        { student_id: 5, name: "Vikram Singh", attendance_percentage: 55, internal_marks: 35, assignment_scores: [4, 3, 5] }
+      ]
+    };
+
+    const avg = arr => (arr.reduce((a, b) => a + b, 0) / arr.length).toFixed(2);
+
+    const allInternal = data.students.map(s => s.internal_marks);
+    const allAssignment = data.students.flatMap(s => s.assignment_scores);
+    document.getElementById("avgInternal").textContent = avg(allInternal);
+    document.getElementById("avgAssignment").textContent = avg(allAssignment);
+
+    const tbody = document.getElementById("tableBody");
+    data.students.forEach(s => {
+      const reasons = [];
+      if (s.attendance_percentage < 75) reasons.push("Low Attendance");
+      if (s.internal_marks < 40) reasons.push("Low Internal Marks");
+      const status = reasons.length
+        ? `<span class="risk">⚠️ At Risk: ${reasons.join(", ")}</span>`
+        : `<span class="safe">✅ Safe</span>`;
+
+      tbody.innerHTML += `
+        <tr>
+          <td>${s.name}</td>
+          <td>${s.attendance_percentage}%</td>
+          <td>${s.internal_marks}</td>
+          <td>${avg(s.assignment_scores)}</td>
+          <td>${status}</td>
+        </tr>`;
+    });
+  </script>
+</body>
+</html>
