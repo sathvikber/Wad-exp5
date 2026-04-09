@@ -1,0 +1,12 @@
+{
+  "course_id": "CS101",
+  "course_name": "Data Structures",
+  "instructor": "Dr. Mehta",
+  "students": [
+    { "student_id": 1, "name": "Ravi Kumar", "attendance_percentage": 80, "internal_marks": 45, "assignment_scores": [8, 9, 7] },
+    { "student_id": 2, "name": "Priya Sharma", "attendance_percentage": 60, "internal_marks": 38, "assignment_scores": [5, 6, 4] },
+    { "student_id": 3, "name": "Arjun Patel", "attendance_percentage": 90, "internal_marks": 50, "assignment_scores": [9, 10, 9] },
+    { "student_id": 4, "name": "Neha Reddy", "attendance_percentage": 72, "internal_marks": 42, "assignment_scores": [7, 8, 6] },
+    { "student_id": 5, "name": "Vikram Singh", "attendance_percentage": 55, "internal_marks": 35, "assignment_scores": [4, 3, 5] }
+  ]
+}
