@@ -1,0 +1,7 @@
+[
+  { "product_id": 1, "product_name": "Laptop", "price": 55000, "category": "Electronics", "rating": 4.5 },
+  { "product_id": 2, "product_name": "Headphones", "price": 2500, "category": "Electronics", "rating": 4.2 },
+  { "product_id": 3, "product_name": "Desk Chair", "price": 8000, "category": "Furniture", "rating": 3.8 },
+  { "product_id": 4, "product_name": "Notebook", "price": 150, "category": "Stationery", "rating": 4.0 },
+  { "product_id": 5, "product_name": "Bookshelf", "price": 4500, "category": "Furniture", "rating": 4.3 }
+]
