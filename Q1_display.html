@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Academic Records</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      min-height: 100vh;
+      padding: 30px;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    h1 { text-align: center; color: #333; margin-bottom: 5px; }
+    p.subtitle { text-align: center; color: #777; margin-bottom: 25px; }
+    table { width: 100%; border-collapse: collapse; }
+    thead { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
+    th, td { padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: left; }
+    tbody tr:hover { background: #f0f0ff; }
+    tbody tr:nth-child(even) { background: #fafafa; }
+    .cgpa-high { color: #27ae60; font-weight: bold; }
+    .badge {
+      background: #667eea;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 0.8em;
+      margin: 2px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎓 Student Academic Records</h1>
+    <p class="subtitle">Showing students with CGPA &gt; 8.0</p>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th><th>Name</th><th>Department</th>
+          <th>CGPA</th><th>Hosteller</th><th>Skills</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const students = [
+      { student_id: 1, name: "Ravi Kumar", department: "CSE", cgpa: 8.9, isHosteller: true, skills: ["Python", "Java", "SQL"] },
+      { student_id: 2, name: "Priya Sharma", department: "ECE", cgpa: 7.5, isHosteller: false, skills: ["MATLAB", "C++"] },
+      { student_id: 3, name: "Arjun Patel", department: "MECH", cgpa: 8.3, isHosteller: true, skills: ["AutoCAD", "SolidWorks"] },
+      { student_id: 4, name: "Neha Reddy", department: "CSE", cgpa: 9.1, isHosteller: false, skills: ["React", "Node.js", "MongoDB"] },
+      { student_id: 5, name: "Vikram Singh", department: "IT", cgpa: 6.8, isHosteller: true, skills: ["HTML", "CSS"] }
+    ];
+
+    const tbody = document.getElementById("tableBody");
+    const filtered = students.filter(s => s.cgpa > 8.0);
+
+    filtered.forEach(s => {
+      const skills = s.skills.map(sk => `<span class="badge">${sk}</span>`).join(" ");
+      tbody.innerHTML += `
+        <tr>
+          <td>${s.student_id}</td>
+          <td>${s.name}</td>
+          <td>${s.department}</td>
+          <td class="cgpa-high">${s.cgpa}</td>
+          <td>${s.isHosteller ? "✅ Yes" : "❌ No"}</td>
+          <td>${skills}</td>
+        </tr>`;
+    });
+  </script>
+</body>
+</html>
